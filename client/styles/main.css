@@ -4,10 +4,21 @@
 
 .time-slot {
   width: 6em;
-  height: 2em;
+  height: 1.5em;
   border: solid;
   border-color: black;
   border-width: 1px;
+  margin: 0;
+}
+
+.time-slot-btn {
+  width: 6em;
+  height: 1.5em;
+}
+
+.time-label {
+  width: 6em;
+  height: 1.5em;
 }
 
 .calendar {
