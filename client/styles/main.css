@@ -16,6 +16,10 @@
   height: 1.5em;
 }
 
+.booked {
+  background-color: brown;
+}
+
 .time-label {
   width: 6em;
   height: 1.5em;

@@ -12,3 +12,8 @@ export interface BookingData {
 export interface Booking extends BookingData {
   id: number
 }
+
+export interface TimeSlot {
+  timeSlot: string
+  courtNumber: number
+}
