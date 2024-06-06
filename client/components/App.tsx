@@ -24,7 +24,6 @@ function App() {
         <h1 className="text-3xl font-bold underline">
           Fullstack Boilerplate - with Fruits!
         </h1>
-        <Calendar />
       </div>
       <BookingTimeContext.Provider value={[bookingTime, setBookingTime]}>
         <div className="app">
