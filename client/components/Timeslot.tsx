@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { BookingTimeContext } from './App'
 import { useNavigate } from 'react-router-dom'
-import type { TimeSlot } from '../../models/booking'
+import type { TimeSlot, Booking } from '../../models/booking'
 
 interface Props {
   timeSlot: number
@@ -9,10 +9,21 @@ interface Props {
   available: boolean
 }
 
+interface SelectedTimes {
+  timeSlot: number
+  courtNumber: number
+}
+
 function Timeslot({ timeSlot, courtNumber, available }: Props) {
   const bookingTimeContext = useContext(BookingTimeContext)
   const [selectedTimes, setSelectedTimes] = bookingTimeContext
   const navigate = useNavigate()
+
+  const timeSlotIndex = selectedTimes.findIndex(
+    (element: TimeSlot) =>
+      element.courtNumber === courtNumber &&
+      Number(element.timeSlot) === timeSlot,
+  )
 
   function handleClick() {
     // if it's a new booking
@@ -22,7 +33,15 @@ function Timeslot({ timeSlot, courtNumber, available }: Props) {
         Number(element.timeSlot) === timeSlot,
     )
     if (timeSlotIndex === -1) {
-      setSelectedTimes([...selectedTimes, { courtNumber, timeSlot }])
+      // const newValues = [{ courtNumber, timeSlot }]
+      // setSelectedTimes((prevState: SelectedTimes) => {
+      //   return [...prevState, ...newValues]
+      // })
+      const newTimes = [...selectedTimes]
+      newTimes.push({ courtNumber, timeSlot })
+      setSelectedTimes(newTimes)
+      // console.log(selectedTimes)
+      // setSelectedTimes(...selectedTimes, ...[{ courtNumber, timeSlot }])
       // console.log(selectedTimes)
     } // pass values to form
     else {
@@ -40,7 +59,7 @@ function Timeslot({ timeSlot, courtNumber, available }: Props) {
   // update the state as a selected timeslot
 
   return (
-    <div className={available ? 'time-slot' : 'time-slot booked'}>
+    <div className={available === true ? 'time-slot' : 'time-slot booked'}>
       <button className="time-slot-btn" onClick={handleClick}></button>
     </div>
   )
