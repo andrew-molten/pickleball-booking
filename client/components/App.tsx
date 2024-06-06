@@ -1,13 +1,16 @@
-import { useBookingsByDay } from '../hooks/useBookings.ts'
-import { useFruits } from '../hooks/useFruits.ts'
+import useBookings from '../hooks/useBookings.ts'
 import Calendar from './Calendar.tsx'
 
 function App() {
-  const { data } = useFruits()
 
-  const { data: bookings } = useBookingsByDay(1720933200000)
-  if (bookings) console.log(bookings)
+  const bookings = useBookings()
 
+  // const { data: dailyBookings } = bookings.byDay(1721044800000)
+  
+    // THE FUNCTIONS BELOW WORK BUT INFINITELY, RECURSIVELY LOOP (SEE DATABASE FOR EVIDENCE)
+    // bookings.del(String(14))  
+    // bookings.add({ court_id: 3, user_id: 6, date: new Date(1721044800000), start_time: 1100, end_time: 1200, gear_rental: true, price: 20, paid: true })
+  
   return (
     <>
       <div className="app">
@@ -15,7 +18,6 @@ function App() {
           Fullstack Boilerplate - with Fruits!
         </h1>
         <Calendar />
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
       </div>
     </>
   )
