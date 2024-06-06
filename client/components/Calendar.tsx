@@ -1,4 +1,5 @@
 import CourtColumn from './CourtColumn'
+import TimeColumn from './TimesCol'
 
 function Calendar() {
   // date code
@@ -12,11 +13,11 @@ function Calendar() {
   return (
     <>
       <div className="calendar">
-        <p>Start out Calendar</p>
-        <CourtColumn />
-        <CourtColumn />
-        <CourtColumn />
-        <CourtColumn />
+        <TimeColumn />
+        <CourtColumn courtNumber={1} />
+        <CourtColumn courtNumber={2} />
+        <CourtColumn courtNumber={3} />
+        <CourtColumn courtNumber={4} />
       </div>
     </>
   )

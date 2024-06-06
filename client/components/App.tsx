@@ -1,20 +1,23 @@
-import { useFruits } from '../hooks/useFruits.ts'
-import Calendar from './Calendar.tsx'
+import { Outlet } from 'react-router-dom'
+import { createContext, useState } from 'react'
+
+const BookingTimeContext = createContext({ courtNumber: 1, timeslot: '9:30' })
 
 function App() {
-  const { data } = useFruits()
-
+  const [bookingTime, setBookingTime] = useState({
+    courtNumber: 1,
+    timeslot: '9:30',
+  })
   return (
     <>
-      <div className="app">
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
-        <Calendar />
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
-      </div>
+      <BookingTimeContext.Provider value={[bookingTime, setBookingTime]}>
+        <div className="app">
+          <Outlet />
+        </div>
+      </BookingTimeContext.Provider>
     </>
   )
 }
 
 export default App
+export { BookingTimeContext }
