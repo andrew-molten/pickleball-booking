@@ -1,8 +1,12 @@
+import { useBookingsByDay } from '../hooks/useBookings.ts'
 import { useFruits } from '../hooks/useFruits.ts'
 import Calendar from './Calendar.tsx'
 
 function App() {
   const { data } = useFruits()
+
+  const { data: bookings } = useBookingsByDay(1720933200000)
+  if (bookings) console.log(bookings)
 
   return (
     <>

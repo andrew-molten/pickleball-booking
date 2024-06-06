@@ -10,6 +10,18 @@ router.get('/day/:date', async (req, res) => {
     res.json(result)
   } catch (error) {
     console.error(`Error retrieving db.getBookingsByDate:`, error)
+    res.sendStatus(500).json({ error: "Couldn't get the bookings by date" })
+  }
+})
+
+router.post('/', async (req, res) => {
+  const booking = req.body
+  try {
+    const result = await db.addBooking(booking)
+    res.json(result)
+  } catch (error) {
+    console.error(`Error: ${error}`)
+    res.sendStatus(500)
   }
 })
 

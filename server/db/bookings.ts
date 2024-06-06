@@ -1,5 +1,5 @@
 import connection from './connection'
-import { Booking } from '../../models/booking'
+import { BookingData } from '../../models/booking'
 
 const db = connection
 
@@ -9,4 +9,8 @@ export function getBookings() {
 
 export function getBookingsByDate(date: string) {
   return db('bookings').where('date', date).select()
+}
+
+export function addBooking(booking: BookingData) {
+  return db('bookings').insert(booking)
 }
