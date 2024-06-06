@@ -1,6 +1,6 @@
 export interface BookingData {
   court_id: number
-  customer_id: number
+  user_id: number
   date: Date
   start_time: number
   end_time: number

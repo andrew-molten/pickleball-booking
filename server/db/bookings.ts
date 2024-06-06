@@ -8,9 +8,13 @@ export function getBookings() {
 }
 
 export function getBookingsByDate(date: string) {
-  return db('bookings').where('date', date).select()
+  return db('bookings').where({date}).select()
 }
 
 export function addBooking(booking: BookingData) {
   return db('bookings').insert(booking)
+}
+
+export function deleteBooking(id: string) {
+  return db('bookings').where({id}).del()
 }
