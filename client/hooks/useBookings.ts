@@ -26,7 +26,7 @@ export default function useBookings() {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['bookings'] }) 
-        console.log('Added successfully!')
+        console.log('Added booking successfully!')
       }
     })
   }
@@ -40,7 +40,7 @@ export default function useBookings() {
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['bookings'] })
-        console.log('Deleted successfully!')
+        console.log('Deleted booking successfully!')
       }
     })
   }

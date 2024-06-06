@@ -1,6 +1,7 @@
 // import useBookings from '../hooks/useBookings.ts'
-import { Outlet } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 import { createContext, useState } from 'react'
+import Nav from './Nav'
 
 const BookingTimeContext = createContext() // working - figure out type error later
 function App() {
@@ -18,10 +19,14 @@ function App() {
   return (
     <>
       {/* <button onClick={handleAddBooking}>Add a booking</button> */}
+      <Nav />
       <div className="app">
-        <h1 className="text-3xl font-bold underline">
-          Fullstack Boilerplate - with Fruits!
-        </h1>
+        <Link to="/">
+          <h1 className="text-3xl font-bold underline">Pickling</h1>
+        </Link>
+        <Link to="/sign-up">
+          <div>Click Here To Sign Up</div>
+        </Link>
       </div>
       <BookingTimeContext.Provider value={[selectedTimes, setSelectedTimes]}>
         <div className="app">
