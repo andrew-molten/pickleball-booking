@@ -1,5 +1,4 @@
-export interface Booking {
-  id: number
+export interface BookingData {
   court_id: number
   customer_id: number
   date: Date
@@ -8,4 +7,8 @@ export interface Booking {
   gear_rental: boolean
   price: number
   paid: boolean
+}
+
+export interface Booking extends BookingData {
+  id: number
 }
