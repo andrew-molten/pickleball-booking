@@ -1,8 +1,15 @@
 import CourtColumn from './CourtColumn'
 import TimeColumn from './TimesCol'
 import useBookings from '../hooks/useBookings'
+// import { useContext } from 'react'
+// import { BookingTimeContext } from './App'
+import { useNavigate } from 'react-router-dom'
 
 function Calendar() {
+  // const bookingTimeContext = useContext(BookingTimeContext)
+  // const [selectedTimes, setSelectedTimes] = bookingTimeContext
+  const navigate = useNavigate()
+
   // date code
   // const date = new Date()
   // const oldDate = new Date(2024, 5, 6, 18, 0, 0)
@@ -35,7 +42,10 @@ function Calendar() {
   const court4Bookings = daysBookings.filter(
     (booking) => booking.court_id === 4,
   )
-  // pass relevant bookings to each courtColumn as props
+
+  function handleClick() {
+    navigate('booking')
+  }
 
   return (
     <>
@@ -45,6 +55,7 @@ function Calendar() {
         <CourtColumn courtNumber={2} courtBookings={court2Bookings} />
         <CourtColumn courtNumber={3} courtBookings={court3Bookings} />
         <CourtColumn courtNumber={4} courtBookings={court4Bookings} />
+        <button onClick={handleClick}>Book Now</button>
       </div>
     </>
   )

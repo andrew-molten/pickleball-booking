@@ -1,5 +1,8 @@
 import Timeslot from './Timeslot'
 import { Booking } from '../../models/booking'
+import { useContext } from 'react'
+import { BookingTimeContext } from './App'
+import type { TimeSlot } from '../../models/booking'
 
 const times = [
   600, 630, 700, 730, 800, 830, 900, 930, 1000, 1030, 1100, 1130, 1200, 1230,
@@ -13,8 +16,11 @@ interface Props {
 }
 
 function CourtColumn({ courtNumber, courtBookings }: Props) {
-  // checks bookings and creates an array of booked timeslots
-  const timeSlots = times.map((time) => {
+  const bookingTimeContext = useContext(BookingTimeContext)
+  const [selectedTimes, setSelectedTimes] = bookingTimeContext
+
+  // creates an array of booked timeslots
+  const bookedTimeSlots = times.map((time) => {
     const isBooked = courtBookings.some(
       (booking) =>
         booking.start_time === time ||
@@ -22,6 +28,27 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
     )
     return { time, available: !isBooked }
   })
+
+  // if clicked - then pass clicked property to update colour
+  // -access state
+  console.log(selectedTimes)
+  const timeSlots = bookedTimeSlots.map((time) => {
+    // selectedTimes.foreach((timeSlot) => if (timeSlot.))
+    if (time.available === false) {
+      return time
+    }
+
+    // console.log(time)
+    const isClicked = selectedTimes.some(
+      (timeSlot: TimeSlot) =>
+        timeSlot.courtNumber === courtNumber &&
+        Number(timeSlot.timeSlot) === time.time,
+    )
+    return { ...time, clicked: isClicked }
+  })
+
+  console.log(timeSlots)
+
   return (
     <>
       <div>
@@ -31,6 +58,7 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
             timeSlot={slot.time}
             courtNumber={courtNumber}
             available={slot.available}
+            clicked={slot.clicked}
           />
         ))}
         {/* {times.map((slot, index) => {
