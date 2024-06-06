@@ -19,7 +19,7 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
   const bookingTimeContext = useContext(BookingTimeContext)
   const [selectedTimes, setSelectedTimes] = bookingTimeContext
 
-  // creates an array of booked timeslots
+  // returns array of booked timeslots
   const bookedTimeSlots = times.map((time) => {
     const isBooked = courtBookings.some(
       (booking) =>
@@ -29,16 +29,11 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
     return { time, available: !isBooked }
   })
 
-  // if clicked - then pass clicked property to update colour
-  // -access state
-  console.log(selectedTimes)
+  // updates array with clicked timeSlots
   const timeSlots = bookedTimeSlots.map((time) => {
-    // selectedTimes.foreach((timeSlot) => if (timeSlot.))
     if (time.available === false) {
       return time
     }
-
-    // console.log(time)
     const isClicked = selectedTimes.some(
       (timeSlot: TimeSlot) =>
         timeSlot.courtNumber === courtNumber &&
@@ -46,8 +41,6 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
     )
     return { ...time, clicked: isClicked }
   })
-
-  console.log(timeSlots)
 
   return (
     <>

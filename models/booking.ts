@@ -16,4 +16,6 @@ export interface Booking extends BookingData {
 export interface TimeSlot {
   timeSlot: string
   courtNumber: number
+  available?: boolean
+  clicked?: boolean
 }
