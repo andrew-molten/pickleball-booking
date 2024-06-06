@@ -1,10 +1,8 @@
-import useBookings from '../hooks/useBookings.ts'
-import Calendar from './Calendar.tsx'
+// import useBookings from '../hooks/useBookings.ts'
 import { Outlet } from 'react-router-dom'
 import { createContext, useState } from 'react'
 
-const BookingTimeContext = createContext({ courtNumber: 1, timeslot: '9:30' })
-
+const BookingTimeContext = createContext() // working - figure out type error later
 function App() {
   // const bookings = useBookings()
   // const { data: dailyBookings } = bookings.byDay(1721044800000)
@@ -13,10 +11,10 @@ function App() {
   // }
   // console.log(dailyBookings)
 
-  const [bookingTime, setBookingTime] = useState({
-    courtNumber: 1,
-    timeslot: '9:30',
-  })
+  const [selectedTimes, setSelectedTimes] = useState([])
+
+  // selectedTimes = [{   courtNumber: 1, timeStart: '930'}]
+
   return (
     <>
       {/* <button onClick={handleAddBooking}>Add a booking</button> */}
@@ -25,7 +23,7 @@ function App() {
           Fullstack Boilerplate - with Fruits!
         </h1>
       </div>
-      <BookingTimeContext.Provider value={[bookingTime, setBookingTime]}>
+      <BookingTimeContext.Provider value={[selectedTimes, setSelectedTimes]}>
         <div className="app">
           <Outlet />
         </div>
