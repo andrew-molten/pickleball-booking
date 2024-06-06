@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.time-slot {
+  width: 6em;
+  height: 2em;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+}
