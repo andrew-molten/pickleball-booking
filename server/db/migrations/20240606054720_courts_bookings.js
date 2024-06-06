@@ -3,14 +3,10 @@
  * @returns { Promise<void> }
  */
 export const up = function (knex) {
-  return knex.schema.createTable('users', (table) => {
+  return knex.schema.createTable('courts_bookings', (table) => {
     table.integer('id').primary()
-    table.string('auth0_id')
-    table.string('given_name')
-    table.string('surname')
-    table.string('email')
-    table.string('phone')
-    table.boolean('is_admin')
+    table.integer('court_id')
+    table.integer('booking_id')
   })
 }
 
@@ -19,5 +15,5 @@ export const up = function (knex) {
  * @returns { Promise<void> }
  */
 export const down = function (knex) {
-  return knex.schema.dropTable('users')
+  return knex.schema.dropTable('courts_bookings')
 }
