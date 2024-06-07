@@ -29,10 +29,14 @@ router.get('/user/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', checkJwt, async (req: JwtRequest, res) => {
+  const sub = req.auth?.sub
   const booking = req.body
+  if(!sub) {
+    res.sendStatus(401)
+  }
   try {
-    const result = await db.addBooking(booking)
+    const result = await db.addBooking({...booking, user_id: sub})
     res.json(result)
   } catch (error) {
     console.error(`Error: ${error}`)
@@ -40,10 +44,14 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
+  const sub = req.auth?.sub
   const { id } = req.params
+  if (!sub) {
+    res.sendStatus(401)
+  }
   try {
-    await db.deleteBooking(id)
+    await db.deleteBooking(sub as string, id)
     res.sendStatus(204)
   } catch (error) {
     console.error(`Error: ${error}`)

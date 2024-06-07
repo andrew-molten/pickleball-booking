@@ -30,8 +30,8 @@ export default function useBookings() {
   function useAddBooking() {
     const queryClient = useQueryClient()
     return useMutation({ 
-      mutationFn: async (booking: BookingData) => {
-        const res = await request.post(rootURL).send(booking)
+      mutationFn: async ({token, booking}: {token: string, booking: BookingData}) => {
+        const res = await request.post(rootURL).set('Authorization', `Bearer ${token}`).send(booking)
         return res.body
       },
       onSuccess: () => {
@@ -44,8 +44,8 @@ export default function useBookings() {
   function useDeleteBooking() {
     const queryClient = useQueryClient()
     return useMutation({
-      mutationFn: async (id: string) => {
-        const res = await request.delete(`${rootURL}/${id}`)
+      mutationFn: async ({token, booking_id}: {token: string, booking_id: string}) => {
+        const res = await request.delete(`${rootURL}/${booking_id}`).set('Authorization', `Bearer ${token}`)
         return res.body
       },
       onSuccess: () => {
