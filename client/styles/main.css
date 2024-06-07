@@ -47,3 +47,9 @@ input {
   border-radius: 5;
   box-sizing: border-box;
 }
+
+.confirm-btn {
+  background-color: rgb(150, 218, 32);
+  padding: 0.5em;
+  border-radius: 15px;
+}

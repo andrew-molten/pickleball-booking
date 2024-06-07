@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { BookingTimeContext } from './App'
 import { BookingData, TimeSlot } from '../../models/booking'
 import { times } from './CourtColumn'
+import useBookings from '../hooks/useBookings'
 
 const user = {
   id: 1,
@@ -13,18 +14,10 @@ const user = {
   is_admin: false,
 }
 
-// court_id: number
-// user_id: number
-// date: number
-// start_time: number
-// end_time: number
-// gear_rental: boolean
-// price: number
-// paid: boolean
-
 function BookingForm() {
   const bookingTimeContext = useContext(BookingTimeContext)
   const [selectedTimes, setSelectedTimes] = bookingTimeContext
+  const bookings = useBookings()
 
   const calendarDate = new Date(selectedTimes[0].date)
   const calDateObj = {
@@ -68,11 +61,20 @@ function BookingForm() {
         time: time.timeSlot,
       })
     if (time.courtNumber === 2)
-      courtTwo.push(getDateTime(String(time.timeSlot)))
+      courtTwo.push({
+        dateTime: getDateTime(String(time.timeSlot)),
+        time: time.timeSlot,
+      })
     if (time.courtNumber === 3)
-      courtThree.push(getDateTime(String(time.timeSlot)))
+      courtThree.push({
+        dateTime: getDateTime(String(time.timeSlot)),
+        time: time.timeSlot,
+      })
     if (time.courtNumber === 4)
-      courtFour.push(getDateTime(String(time.timeSlot)))
+      courtFour.push({
+        dateTime: getDateTime(String(time.timeSlot)),
+        time: time.timeSlot,
+      })
   })
 
   // for (let i = 0; i < courtOne.length; ) {
@@ -86,6 +88,9 @@ function BookingForm() {
   courtFour.sort()
 
   const courtOneTimes = []
+  const courtTwoTimes = []
+  const courtThreeTimes = []
+  const courtFourTimes = []
 
   function addTimeChunks(courtTimes, array) {
     const courtIndexes = []
@@ -113,11 +118,49 @@ function BookingForm() {
   }
 
   addTimeChunks(courtOne, courtOneTimes)
+  addTimeChunks(courtTwo, courtTwoTimes)
+  addTimeChunks(courtThree, courtThreeTimes)
+  addTimeChunks(courtFour, courtFourTimes)
   console.log(courtOneTimes)
+  console.log(courtTwoTimes)
+  console.log(courtThreeTimes)
+  console.log(courtFourTimes)
 
   // console.log(courtOne)
   // console.log(courtTwo)
   // console.log(courtThree)
+
+  // const user = {
+  //   id: 1,
+  //   auth0_id: 'whatdoesthislooklike',
+  //   given_name: 'little',
+  //   surname: 'pickle',
+  //   email: 'baby.gherkin@gmail.com',
+  //   phone: '00000000',
+  //   is_admin: false,
+  // }
+  async function handleBookingClick() {
+    const bookingObj = {
+      court_id: 1,
+      user_id: user.id,
+      date: selectedTimes[0].date,
+      start_time: times[courtOneTimes[0][0]],
+      end_time: times[courtOneTimes[0][courtOneTimes[0].length - 1]],
+      gear_rental: false,
+      price: 100,
+      paid: false,
+    }
+    bookings.add(bookingObj)
+  }
+
+  // court_id: number
+  // user_id?: number
+  // date: number
+  // start_time: number
+  // end_time: number
+  // gear_rental: boolean
+  // price: number
+  // paid: boolean
 
   return (
     <>
@@ -125,21 +168,67 @@ function BookingForm() {
         <span>
           Booking for: {user.given_name} {user.surname}{' '}
         </span>
-        <form>
-          {/* <label htmlFor="given_name">Given name</label>
-          <input type="text" /> */}
-          <label htmlFor="start-time">Start time</label>
-          {/* drop down box with times (pre-selecting bookingTime.timeSlot) */}
-          <label></label>
-        </form>
-        {selectedTimes.map((time) => (
-          <p key={time.courtNumber + time.timeSlot}>
-            {time.courtNumber} - {time.timeSlot}
+
+        {courtOneTimes.length > 0 ? (
+          <h3>
+            <strong>Court One times</strong>
+          </h3>
+        ) : (
+          ''
+        )}
+        {courtOneTimes.map((time, i) => (
+          <p key={i}>
+            {times[time[0]]} until {times[time[time.length - 1]]}
           </p>
         ))}
+        {courtTwoTimes.length > 0 ? (
+          <h3>
+            <strong>Court Two times</strong>
+          </h3>
+        ) : (
+          ''
+        )}
+        {courtTwoTimes.map((time, i) => (
+          <p key={i}>
+            {times[time[0]]} until {times[time[time.length - 1]]}
+          </p>
+        ))}
+        {courtThreeTimes.length > 0 ? (
+          <h3>
+            <strong>Court Three times</strong>
+          </h3>
+        ) : (
+          ''
+        )}
+        {courtThreeTimes.map((time, i) => (
+          <p key={i}>
+            {times[time[0]]} until {times[time[time.length - 1]]}
+          </p>
+        ))}
+        {courtFourTimes.length > 0 ? (
+          <h3>
+            <strong>Court Four times</strong>
+          </h3>
+        ) : (
+          ''
+        )}
+        {courtFourTimes.map((time, i) => (
+          <p key={i}>
+            {times[time[0]]} until {times[time[time.length - 1]]}
+          </p>
+        ))}
+        <button className="confirm-btn" onClick={handleBookingClick}>
+          Confirm booking
+        </button>
       </div>
     </>
   )
+}
+
+{
+  /* <p key={time.courtNumber + time.timeSlot}>
+{time.courtNumber} - {time.timeSlot}
+</p> */
 }
 
 export default BookingForm
