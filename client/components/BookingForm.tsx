@@ -92,26 +92,24 @@ function BookingForm() {
 
     for (let i = 0; i < courtTimes.length; i++) {
       const index = times.indexOf(courtTimes[i].time)
-      console.log(courtOneTimes)
-      console.log(index === courtIndexes[courtIndexes.length - 1] + 1)
 
-      if (i === courtIndexes.length - 1) {
-        courtOneTimes.push([index])
+      if (i === courtTimes.length - 1) {
+        if (courtIndexes.length > 0) {
+          array.push([...courtIndexes])
+        } else {
+          courtOneTimes.push([index])
+        }
       } else if (
         index === courtIndexes[courtIndexes.length - 1] + 1 ||
         courtIndexes.length === 0
       ) {
         courtIndexes.push(index)
-        console.log(courtIndexes)
       } else {
-        array.push(courtIndexes)
-        console.log(courtOneTimes)
+        array.push([...courtIndexes])
         courtIndexes.length = 0
+        courtIndexes.push(index)
       }
-
-      // make the time slot
     }
-    console.log(courtIndexes)
   }
 
   addTimeChunks(courtOne, courtOneTimes)
