@@ -15,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
      * TODO: replace domain, clientId, and audience
      */
     <Auth0Provider
-      domain=""
-      clientId=""
+      domain="whai-2024-sam.au.auth0.com"
+      clientId="5sSRp8JdHISVz3Shvhfr43kWTq4tME2W"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'https://pickling/api',
       }}
     >
       <QueryClientProvider client={queryClient}>

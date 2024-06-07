@@ -5,7 +5,7 @@
 export const seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('users').del()
-  await knex('users').insert([
+  await knex('users').insert([//google-oauth2|115329107932736690149 // zac
     {
       id: 1,
       auth0_id: 'whatdoesthislooklike',

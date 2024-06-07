@@ -33,3 +33,17 @@
 .clicked {
   background-color: goldenrod;
 }
+
+.user-form-container {
+  flex-flow: row wrap;
+}
+.user-form-item {
+  justify-content: center;
+}
+input {
+  width: 200px;
+  border: solid black;
+  border-width: thin;
+  border-radius: 5;
+  box-sizing: border-box;
+}
