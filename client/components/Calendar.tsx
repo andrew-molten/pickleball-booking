@@ -81,7 +81,9 @@ function Calendar() {
           courtBookings={court4Bookings}
           date={date}
         />
-        <button onClick={handleClick}>Book Now</button>
+        <button className="confirm-btn" onClick={handleClick}>
+          Book Now
+        </button>
       </div>
     </>
   )

@@ -3,7 +3,9 @@ import { BookingTimeContext } from './App'
 import { BookingData, TimeSlot } from '../../models/booking'
 import { times } from './CourtColumn'
 import useBookings from '../hooks/useBookings'
-
+import { useAuth0 } from '@auth0/auth0-react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 const user = {
   id: 1,
   auth0_id: 'whatdoesthislooklike',
@@ -25,6 +27,16 @@ function BookingForm() {
     month: calendarDate.getMonth(),
     day: calendarDate.getDate(),
   }
+
+  const [token, setToken] = useState('')
+  const { getAccessTokenSilently } = useAuth0()
+  useEffect(() => {
+    getAccessTokenSilently()
+      .then((token) => {
+        setToken(token)
+      })
+      .catch((error) => console.error(error.message))
+  }, [getAccessTokenSilently])
   // console.log(calDateObj)
 
   // How to display the times selected - ideally for each value it will say:
@@ -77,15 +89,10 @@ function BookingForm() {
       })
   })
 
-  // for (let i = 0; i < courtOne.length; ) {
-
-  // }
-
-  // if time matches the times index and there is another time that also matches that
   courtOne.sort((a, b) => a.dateTime - b.dateTime)
-  courtTwo.sort()
-  courtThree.sort()
-  courtFour.sort()
+  courtTwo.sort((a, b) => a.dateTime - b.dateTime)
+  courtThree.sort((a, b) => a.dateTime - b.dateTime)
+  courtFour.sort((a, b) => a.dateTime - b.dateTime)
 
   const courtOneTimes = []
   const courtTwoTimes = []
@@ -110,6 +117,7 @@ function BookingForm() {
       ) {
         courtIndexes.push(index)
       } else {
+        // courtIndexes.push(courtIndexes[courtIndexes.length] + 1)
         array.push([...courtIndexes])
         courtIndexes.length = 0
         courtIndexes.push(index)
@@ -121,14 +129,10 @@ function BookingForm() {
   addTimeChunks(courtTwo, courtTwoTimes)
   addTimeChunks(courtThree, courtThreeTimes)
   addTimeChunks(courtFour, courtFourTimes)
-  console.log(courtOneTimes)
-  console.log(courtTwoTimes)
-  console.log(courtThreeTimes)
-  console.log(courtFourTimes)
-
-  // console.log(courtOne)
-  // console.log(courtTwo)
-  // console.log(courtThree)
+  // console.log(courtOneTimes)
+  // console.log(courtTwoTimes)
+  // console.log(courtThreeTimes)
+  // console.log(courtFourTimes)
 
   // const user = {
   //   id: 1,
@@ -139,8 +143,9 @@ function BookingForm() {
   //   phone: '00000000',
   //   is_admin: false,
   // }
+  console.log(courtOneTimes)
   async function handleBookingClick() {
-    const bookingObj = {
+    const booking = {
       court_id: 1,
       user_id: user.id,
       date: selectedTimes[0].date,
@@ -150,7 +155,7 @@ function BookingForm() {
       price: 100,
       paid: false,
     }
-    bookings.add(bookingObj)
+    bookings.add({ token, booking })
   }
 
   // court_id: number
@@ -223,12 +228,6 @@ function BookingForm() {
       </div>
     </>
   )
-}
-
-{
-  /* <p key={time.courtNumber + time.timeSlot}>
-{time.courtNumber} - {time.timeSlot}
-</p> */
 }
 
 export default BookingForm
