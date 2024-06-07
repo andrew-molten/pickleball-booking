@@ -7,6 +7,7 @@ interface Props {
   courtNumber: number
   available: boolean
   clicked: boolean
+  date: number
 }
 
 // interface SelectedTimes {
@@ -14,7 +15,7 @@ interface Props {
 //   courtNumber: number
 // }
 
-function Timeslot({ timeSlot, courtNumber, available, clicked }: Props) {
+function Timeslot({ timeSlot, courtNumber, available, clicked, date }: Props) {
   const bookingTimeContext = useContext(BookingTimeContext)
   const [selectedTimes, setSelectedTimes] = bookingTimeContext
 
@@ -37,7 +38,7 @@ function Timeslot({ timeSlot, courtNumber, available, clicked }: Props) {
       //   return [...prevState, ...newValues]
       // })
       const newTimes = [...selectedTimes]
-      newTimes.push({ courtNumber, timeSlot })
+      newTimes.push({ courtNumber, timeSlot, date })
       setSelectedTimes(newTimes) // set global state
     } else {
       const newSelectedTimes = [...selectedTimes]

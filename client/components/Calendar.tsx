@@ -30,6 +30,8 @@ function Calendar() {
     )
   }
 
+
+
   const court1Bookings = daysBookings.filter(
     (booking) => booking.court_id === 1,
   )
@@ -44,6 +46,7 @@ function Calendar() {
   )
 
   function handleClick() {
+    // add guard for if state is empty
     navigate('booking')
   }
 
@@ -51,10 +54,10 @@ function Calendar() {
     <>
       <div className="calendar">
         <TimeColumn />
-        <CourtColumn courtNumber={1} courtBookings={court1Bookings} />
-        <CourtColumn courtNumber={2} courtBookings={court2Bookings} />
-        <CourtColumn courtNumber={3} courtBookings={court3Bookings} />
-        <CourtColumn courtNumber={4} courtBookings={court4Bookings} />
+        <CourtColumn courtNumber={1} courtBookings={court1Bookings} date={date}/>
+        <CourtColumn courtNumber={2} courtBookings={court2Bookings} date={date} />
+        <CourtColumn courtNumber={3} courtBookings={court3Bookings} date={date} />
+        <CourtColumn courtNumber={4} courtBookings={court4Bookings} date={date}/>
         <button onClick={handleClick}>Book Now</button>
       </div>
     </>

@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { BookingTimeContext } from './App'
 import type { TimeSlot } from '../../models/booking'
 
-const times = [
+export const times = [
   600, 630, 700, 730, 800, 830, 900, 930, 1000, 1030, 1100, 1130, 1200, 1230,
   1300, 1330, 1400, 1430, 1500, 1530, 1600, 1630, 1700, 1730, 1800, 1830, 1900,
   1930, 2000, 2030, 2100, 2130,
@@ -13,9 +13,10 @@ const times = [
 interface Props {
   courtNumber: number
   courtBookings: Booking[]
+  date: number
 }
 
-function CourtColumn({ courtNumber, courtBookings }: Props) {
+function CourtColumn({ courtNumber, courtBookings, date }: Props) {
   const bookingTimeContext = useContext(BookingTimeContext)
   const [selectedTimes, setSelectedTimes] = bookingTimeContext
 
@@ -52,6 +53,7 @@ function CourtColumn({ courtNumber, courtBookings }: Props) {
             courtNumber={courtNumber}
             available={slot.available}
             clicked={slot.clicked}
+            date={date}
           />
         ))}
         {/* {times.map((slot, index) => {
