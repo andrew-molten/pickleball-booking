@@ -7,6 +7,16 @@ const rootURL = '/api/v1/bookings'
 
 export default function useBookings() {
 
+  function useGetBookingsByUser(token: string) {
+    return useQuery({
+      queryKey: ['bookings'],
+      queryFn: async () => {
+        const res = await request.get(`${rootURL}/user/`).set('Authorization', `Bearer ${token}`)
+        return res.body as Booking[]
+      }
+    })
+  }
+
   function useGetBookingsByDay(date: number) {
     return useQuery({
       queryKey: ['bookings'],
@@ -46,6 +56,7 @@ export default function useBookings() {
   }
   
   return {
+    byUser: useGetBookingsByUser,
     byDay: useGetBookingsByDay,
     add: useAddBooking().mutate,
     del: useDeleteBooking().mutate,

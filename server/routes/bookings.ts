@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import * as db from '../db/bookings.ts'
+import checkJwt, { JwtRequest } from '../auth0.ts'
 
 const router = Router()
 
@@ -11,6 +12,20 @@ router.get('/day/:date', async (req, res) => {
   } catch (error) {
     console.error(`Error retrieving db.getBookingsByDate:`, error)
     res.sendStatus(500).json({ error: "Couldn't get the bookings by date" })
+  }
+})
+
+router.get('/user/', checkJwt, async (req: JwtRequest, res) => {
+  const sub = req.auth?.sub
+  if (!sub) {
+    res.sendStatus(401)
+  }
+  try {
+    const result = await db.getBookingsByUser(sub as string)
+    res.json(result)
+  } catch (error) {
+    console.error(`Error retrieving db.getBookingsByUser:`, error)
+    res.sendStatus(500).json({ error: "Couldn't get the bookings by user" })
   }
 })
 

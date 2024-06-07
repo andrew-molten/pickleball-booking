@@ -1,19 +1,30 @@
 import CourtColumn from './CourtColumn'
 import TimeColumn from './TimesCol'
 import useBookings from '../hooks/useBookings'
+// import { useAuth0 } from '@auth0/auth0-react'
+// import { useState, useEffect } from 'react'
 
 function Calendar() {
-  // date code
-  // const date = new Date()
-  // const oldDate = new Date(2024, 5, 6, 18, 0, 0)
-  // const dateInMs = date.getTime()
-  // const oldDateInMs = oldDate.getTime()
-  // const elapsed = dateInMs - oldDateInMs
-  // console.log(elapsed / 60000)
-
-  // get all of the bookings for the day // 1720872000000 // is in the seed info for the database
-  const date = 1720872000000
   const bookings = useBookings()
+
+  // const [token, setToken] = useState('')
+  // const { getAccessTokenSilently } = useAuth0()
+  // const { data, isPending, isError, error } = bookings.byUser(token)
+  // useEffect(
+  //   () => {
+  //     getAccessTokenSilently()
+  //     .then((token) => {
+  //       setToken(token)
+  //     })
+  //     .catch(error => console.error(error.message))
+  //   },
+  //   [getAccessTokenSilently]
+  // )
+  // if (isPending) return <p>Loading...</p>
+  // if (isError) return <p>Error: {error.message}</p>
+  // console.log(data)
+
+  const date = 1720872000000
   const { data: daysBookings, isPending, isError, error } = bookings.byDay(date)
   if (isPending) return <span>Checking todays bookings....</span>
   if (isError) {
@@ -22,6 +33,8 @@ function Calendar() {
       <span>{`We couldn't find information for todays bookings, please try again later`}</span>
     )
   }
+
+  
 
   const court1Bookings = daysBookings.filter(
     (booking) => booking.court_id === 1,
@@ -35,7 +48,6 @@ function Calendar() {
   const court4Bookings = daysBookings.filter(
     (booking) => booking.court_id === 4,
   )
-  // pass relevant bookings to each courtColumn as props
 
   return (
     <>

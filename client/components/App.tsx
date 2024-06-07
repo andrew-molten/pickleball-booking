@@ -1,5 +1,5 @@
 // import useBookings from '../hooks/useBookings.ts'
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { createContext, useState } from 'react'
 import Nav from './Nav'
 
@@ -20,14 +20,7 @@ function App() {
     <>
       {/* <button onClick={handleAddBooking}>Add a booking</button> */}
       <Nav />
-      <div className="app">
-        <Link to="/">
-          <h1 className="text-3xl font-bold underline">Pickling</h1>
-        </Link>
-        <Link to="/sign-up">
-          <div>Click Here To Sign Up</div>
-        </Link>
-      </div>
+      <h1 className="text-3xl font-bold underline">Pickling</h1>
       <BookingTimeContext.Provider value={[selectedTimes, setSelectedTimes]}>
         <div className="app">
           <Outlet />
