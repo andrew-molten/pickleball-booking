@@ -66,13 +66,13 @@ function BookingForm() {
     return date.getTime()
   }
 
+  // fill court arrays with times
   function pushTimeToCourt(time: SelectedTime, array: BookedSlot[]) {
     array.push({
       dateTime: getDateTime(String(time.timeSlot)),
       time: time.timeSlot,
     })
   }
-
   selectedTimes.forEach((time: SelectedTime) => {
     if (time.courtNumber === 1) pushTimeToCourt(time, courtOne)
     if (time.courtNumber === 2) pushTimeToCourt(time, courtTwo)
@@ -98,9 +98,10 @@ function BookingForm() {
       const index = times.indexOf(courtTimes[i].time)
 
       if (i === courtTimes.length - 1) {
+        // last entry
+
         if (courtIndexes.length > 0) {
-          array.push([...courtIndexes])
-          // array = [...courtIndexes]
+          array.push([...courtIndexes, index])
         } else {
           array.push([index])
         }
@@ -176,7 +177,7 @@ function BookingForm() {
         )}
         {courtOneTimes.map((time, i) => (
           <p key={i}>
-            {times[time[0]]} until {times[time[time.length - 1]]}
+            {times[time[0]]} until {times[time[time.length - 1] + 1]}
           </p>
         ))}
         {courtTwoTimes.length > 0 ? (
@@ -188,7 +189,7 @@ function BookingForm() {
         )}
         {courtTwoTimes.map((time, i) => (
           <p key={i}>
-            {times[time[0]]} until {times[time[time.length - 1]]}
+            {times[time[0]]} until {times[time[time.length - 1] + 1]}
           </p>
         ))}
         {courtThreeTimes.length > 0 ? (
@@ -200,7 +201,7 @@ function BookingForm() {
         )}
         {courtThreeTimes.map((time, i) => (
           <p key={i}>
-            {times[time[0]]} until {times[time[time.length - 1]]}
+            {times[time[0]]} until {times[time[time.length - 1] + 1]}
           </p>
         ))}
         {courtFourTimes.length > 0 ? (
@@ -212,7 +213,7 @@ function BookingForm() {
         )}
         {courtFourTimes.map((time, i) => (
           <p key={i}>
-            {times[time[0]]} until {times[time[time.length - 1]]}
+            {times[time[0]]} until {times[time[time.length - 1] + 1]}
           </p>
         ))}
         <button className="confirm-btn" onClick={handleBookingClick}>
