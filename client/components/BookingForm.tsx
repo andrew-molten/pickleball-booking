@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { BookingTimeContext } from './App'
-import { BookingData, TimeSlot } from '../../models/booking'
+import { BookedSlot, BookingData, TimeSlot } from '../../models/booking'
 import { times } from './CourtColumn'
 import useBookings from '../hooks/useBookings'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -44,10 +44,10 @@ function BookingForm() {
   // Booked court 1 from {startTime} to {endTime}
 
   // get courtNumber[0] if there are any more of that number CourtNumber then find end time
-  const courtOne: Date[] = []
-  const courtTwo: Date[] = []
-  const courtThree: Date[] = []
-  const courtFour: Date[] = []
+  const courtOne: BookedSlot[] = []
+  const courtTwo: BookedSlot[] = []
+  const courtThree: BookedSlot[] = []
+  const courtFour: BookedSlot[] = []
 
   // deconstruct time function to pass in as a date/time
   function getDateTime(time: string) {

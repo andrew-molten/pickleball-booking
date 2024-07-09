@@ -15,13 +15,10 @@ export function addBooking(booking: BookingData) {
   return db('bookings').insert(booking)
 }
 
-<<<<<<< HEAD
-export function deleteBooking(id: string) {
-  return db('bookings').where({ id }).del()
-=======
+// export function deleteBooking(id: string) {
+//   return db('bookings').where({ id }).del()
 export function deleteBooking(sub: string, id: string) {
-  return db('bookings').where({user_id: sub}).where({id}).del()
->>>>>>> main
+  return db('bookings').where({ user_id: sub }).where({ id }).del()
 }
 
 export function getBookingsByUser(id: string) {
