@@ -66,41 +66,33 @@ function BookingForm() {
     return date.getTime()
   }
 
+  function pushTimeToCourt(time: SelectedTime, array: BookedSlot[]) {
+    array.push({
+      dateTime: getDateTime(String(time.timeSlot)),
+      time: time.timeSlot,
+    })
+  }
+
   selectedTimes.forEach((time: SelectedTime) => {
-    if (time.courtNumber === 1)
-      courtOne.push({
-        dateTime: getDateTime(String(time.timeSlot)),
-        time: time.timeSlot,
-      })
-    if (time.courtNumber === 2)
-      courtTwo.push({
-        dateTime: getDateTime(String(time.timeSlot)),
-        time: time.timeSlot,
-      })
-    if (time.courtNumber === 3)
-      courtThree.push({
-        dateTime: getDateTime(String(time.timeSlot)),
-        time: time.timeSlot,
-      })
-    if (time.courtNumber === 4)
-      courtFour.push({
-        dateTime: getDateTime(String(time.timeSlot)),
-        time: time.timeSlot,
-      })
+    if (time.courtNumber === 1) pushTimeToCourt(time, courtOne)
+    if (time.courtNumber === 2) pushTimeToCourt(time, courtTwo)
+    if (time.courtNumber === 3) pushTimeToCourt(time, courtThree)
+    if (time.courtNumber === 4) pushTimeToCourt(time, courtFour)
   })
 
+  // Sort arrays by time
   courtOne.sort((a, b) => a.dateTime - b.dateTime)
   courtTwo.sort((a, b) => a.dateTime - b.dateTime)
   courtThree.sort((a, b) => a.dateTime - b.dateTime)
   courtFour.sort((a, b) => a.dateTime - b.dateTime)
 
-  const courtOneTimes = []
-  const courtTwoTimes = []
-  const courtThreeTimes = []
-  const courtFourTimes = []
+  const courtOneTimes: number[] = []
+  const courtTwoTimes: number[] = []
+  const courtThreeTimes: number[] = []
+  const courtFourTimes: number[] = []
 
-  function addTimeChunks(courtTimes, array) {
-    const courtIndexes = []
+  function addTimeChunks(courtTimes: BookedSlot[], array: number[]) {
+    const courtIndexes: number[] = []
 
     for (let i = 0; i < courtTimes.length; i++) {
       const index = times.indexOf(courtTimes[i].time)
@@ -108,8 +100,9 @@ function BookingForm() {
       if (i === courtTimes.length - 1) {
         if (courtIndexes.length > 0) {
           array.push([...courtIndexes])
+          // array = [...courtIndexes]
         } else {
-          courtOneTimes.push([index])
+          array.push([index])
         }
       } else if (
         index === courtIndexes[courtIndexes.length - 1] + 1 ||

@@ -38,7 +38,7 @@ function Calendar() {
       return { ...booking, isUserBooking: false }
     }
   })
-  console.log(daysBookings)
+  // console.log(daysBookings)
   const court1Bookings = daysBookings.filter(
     (booking) => booking.court_id === 1,
   )
@@ -53,7 +53,7 @@ function Calendar() {
   )
 
   function handleClick() {
-    // add guard for if state is empty
+    // need to add guard for if state is empty
     navigate('booking')
   }
 
