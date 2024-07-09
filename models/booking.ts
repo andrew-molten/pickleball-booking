@@ -21,6 +21,12 @@ export interface TimeSlot {
 }
 
 export interface BookedSlot {
-  dateTime: Date
+  dateTime: number
   time: number
+}
+
+export interface SelectedTime {
+  courtNumber: number
+  date: number
+  timeSlot: number
 }

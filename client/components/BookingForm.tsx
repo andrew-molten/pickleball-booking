@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { BookingTimeContext } from './App'
-import { BookedSlot, BookingData, TimeSlot } from '../../models/booking'
+import { BookedSlot, SelectedTime } from '../../models/booking'
 import { times } from './CourtColumn'
 import useBookings from '../hooks/useBookings'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -63,10 +63,10 @@ function BookingForm() {
       Number(mins),
     )
 
-    return date
+    return date.getTime()
   }
 
-  selectedTimes.forEach((time) => {
+  selectedTimes.forEach((time: SelectedTime) => {
     if (time.courtNumber === 1)
       courtOne.push({
         dateTime: getDateTime(String(time.timeSlot)),
