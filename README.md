@@ -22,6 +22,7 @@ I mostly worked on the front end as I was really interested in how to get the ca
 
 - I found working with dates difficult. I converted dates to unix timestamps and back to dates a few times, which in hindsight, I might have been better off having an object which included both.
 - Our MVP should have been just 1 court, to reduce the complexity in a 24hr project.
+- How to use useContext for global state management.
 
 ### My code
 
