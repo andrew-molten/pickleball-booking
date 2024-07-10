@@ -5,7 +5,7 @@
 export const seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('bookings').del()
-  await knex('bookings').insert([//google-oauth2|115329107932736690149 // zac
+  await knex('bookings').insert([
     {
       id: 1,
       court_id: 1,
@@ -31,7 +31,7 @@ export const seed = async function (knex) {
     {
       id: 3,
       court_id: 3,
-      user_id: 3,
+      user_id: 'google-oauth2|115329107932736690149',
       date: new Date(2024, 6, 14),
       start_time: 1100,
       end_time: 1230,
@@ -42,7 +42,7 @@ export const seed = async function (knex) {
     {
       id: 4,
       court_id: 4,
-      user_id: 4,
+      user_id: 'google-oauth2|115329107932736690149',
       date: new Date(2024, 6, 15),
       start_time: 1200,
       end_time: 1330,
@@ -53,7 +53,7 @@ export const seed = async function (knex) {
     {
       id: 5,
       court_id: 1,
-      user_id: 5,
+      user_id: 'google-oauth2|115329107932736690149',
       date: new Date(2024, 6, 16),
       start_time: 1300,
       end_time: 1430,
@@ -64,7 +64,7 @@ export const seed = async function (knex) {
     {
       id: 6,
       court_id: 2,
-      user_id: 6,
+      user_id: 'google-oauth2|115329107932736690149',
       date: new Date(2024, 6, 17),
       start_time: 1400,
       end_time: 1530,

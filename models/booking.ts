@@ -19,3 +19,14 @@ export interface TimeSlot {
   available?: boolean
   clicked?: boolean
 }
+
+export interface BookedSlot {
+  dateTime: number
+  time: number
+}
+
+export interface SelectedTime {
+  courtNumber: number
+  date: number
+  timeSlot: number
+}
